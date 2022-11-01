@@ -1,17 +1,18 @@
-const express = require("express");
-const { json } = require("express");
-const flights = require("./controllers/flightController");
-const models = require("./models/Flight");
-const routes = require("./routes/flightRoute");
+import express, { json } from "express";
+import router from "./routes/flightRoute.js";
 
-const app = express();
+const server = express();
 
-app.use(json());
+server.use(json());
 
-app.use("/", routes);
+server.use("/flights", router);
+
+server.get("/", (req, res) => {
+  res.send("Welcome to my Flight API");
+});
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
