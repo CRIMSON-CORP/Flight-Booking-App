@@ -1,9 +1,18 @@
-const express = require('express');
+import { Router } from "express";
+const router = Router();
+import {
+  createFlight,
+  deleteFlight,
+  getAllUsers,
+  getSingleFlight,
+  updateFlight,
+} from "../controllers/flightController.js";
 
-const router = express.Router();
-const controller = require('../controllers/flightController');
+router
+  .get("/", getAllUsers)
+  .get("/:id", getSingleFlight)
+  .post("/", createFlight)
+  .delete("/:id", deleteFlight)
+  .patch("/:id", updateFlight);
 
-router.get('/', controller.example)
-
-module.exports = router;
-
+export default router;
